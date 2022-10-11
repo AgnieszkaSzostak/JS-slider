@@ -1,15 +1,17 @@
 const path = require('path');
 // importuję bibliotekę [path] z [node.js] 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+
 module.exports = {
     entry: './assets/js/script.js',
-// definiuję plik wejściowy 
+    // definiuję plik wejściowy 
     output: {
         path: path.resolve(__dirname, 'build'), 
-// definiuję ścieżkę wyjściową 
+        // definiuję ścieżkę wyjściową 
         filename: 'script.min.js',
-// definiuję nazwę pliku wyjściowego
+        // definiuję nazwę pliku wyjściowego
     }, 
+    target: "web", 
     module: {
         rules: [
             {
@@ -21,10 +23,11 @@ module.exports = {
     },
     plugins: [
         new HtmlWebpackPlugin({
-    template: './index.html', 
-    // wskazuję plik źródłowy 
-    filename: 'index.html'
-    // określam nazwę dla pliku
-}) ]
+            template: './index.html', 
+            // wskazuję plik źródłowy 
+            filename: 'index.html'
+            // określam nazwę dla pliku
+        }) 
+    ],
 }
 // eksportuję ustawienia dla webpacka
