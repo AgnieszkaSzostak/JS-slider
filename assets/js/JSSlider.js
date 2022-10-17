@@ -150,13 +150,7 @@ export default class JSSlider {
             
             const parentCurrent = current.parentElement;
             const nextElement = parentCurrent.nextElementSibling;
-            if(nextElement && !nextElement.className.includes(`${this.sliderRootElement.prototypeClass}`)) {
-                const img = nextElement.querySelector('img')
-                img.classList.add(this.sliderRootElement.currentImageClass);
-        
-                document.querySelector('.js-slider__image').src = img.src;
-                current.classList.remove(this.sliderRootElement.currentImageClass);
-            }
+            this.changeCurrentImage(nextElement, current);
     }
     onImagePrev(event) {
             console.log(this, 'onImagePrev');
@@ -165,13 +159,17 @@ export default class JSSlider {
         
             const parentCurrent = current.parentElement;
             const prevElement = parentCurrent.previousElementSibling;
-            if(prevElement && !prevElement.className.includes(`${this.sliderRootElement.prototypeClass}`)) {
-                const img = prevElement.querySelector('img')
-                img.classList.add(this.sliderRootElement.currentImageClass);
-        
-                document.querySelector('.js-slider__image').src = img.src;
-                current.classList.remove(this.sliderRootElement.currentImageClass);
-            }
+            this.changeCurrentImage(prevElement, current);
+    }
+    
+    changeCurrentImage(newCurrent, current){
+        if(newCurrent && !newCurrent.className.includes(`${this.sliderRootElement.prototypeClass}`)) {
+            const img = newCurrent.querySelector('img')
+            img.classList.add(this.sliderRootElement.currentImageClass);
+    
+            document.querySelector('.js-slider__image').src = img.src;
+            current.classList.remove(this.sliderRootElement.currentImageClass);
+        }
     }
 }
 
