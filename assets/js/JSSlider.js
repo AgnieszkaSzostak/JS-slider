@@ -34,19 +34,23 @@ export default class JSSlider {
             
             this.images.forEach(item => item.addEventListener(
                 'click', 
-                event => this.fireCustomEvent(event.currentTarget, 'js-slider-img-click')))
+                event => this.fireCustomEvent(event.currentTarget, 'js-slider-img-click')
+            ))
 
             this.images.forEach(item => item.addEventListener(
                 'click', 
-                event => this.fireCustomEvent(event.currentTarget, 'js-slider-start')))
+                event => this.fireCustomEvent(event.currentTarget, 'js-slider-start')
+            ))
             
             this.sliderRootElement.buttons.forEach( button => button.addEventListener(
                 'mouseover',
-                event => this.fireCustomEvent(event.currentTarget, 'js-slider-stop')))
+                event => this.fireCustomEvent(event.currentTarget, 'js-slider-stop')
+            ))
 
             this.sliderRootElement.buttons.forEach( button => button.addEventListener(
                 'mouseout',
-                event => this.fireCustomEvent(event.currentTarget, 'js-slider-start'))) 
+                event => this.fireCustomEvent(event.currentTarget, 'js-slider-start')
+            )) 
     
             if(navNext) { 
                 navNext.addEventListener(
@@ -57,8 +61,8 @@ export default class JSSlider {
             if(navPrev) { 
                 navPrev.addEventListener(
                     'click',  
-                    event => this.fireCustomEvent(this.sliderRootElement, 'js-slider-img-prev'))
-
+                    event => this.fireCustomEvent(this.sliderRootElement, 'js-slider-img-prev')
+                )
             }
         
             const zoom = this.sliderRootElement.querySelector('.js-slider__zoom');
@@ -74,17 +78,23 @@ export default class JSSlider {
     initCustomEvents () {
             this.images.forEach( img => img.addEventListener(
                     'js-slider-img-click', 
-                    event => this.onImageClick(event)));
+                    event => this.onImageClick(event)
+            ));
+
             this.images.forEach( img => img.addEventListener(
                     'js-slider-start', 
-                    event => this.slideImages(event)));
+                    event => this.slideImages(event)
+            ));
  
             this.sliderRootElement.buttons.forEach(button => button.addEventListener(
                 'js-slider-stop', 
-                event => this.stopSlideImages(event)));   
+                event => this.stopSlideImages(event)
+            ));   
+
             this.sliderRootElement.buttons.forEach(button => button.addEventListener(
                 'js-slider-start', 
-                event => this.slideImages(event)));   
+                event => this.slideImages(event)
+            ));   
   
             this.sliderRootElement.addEventListener('js-slider-img-next', event => this.onImageNext(event));
             this.sliderRootElement.addEventListener('js-slider-img-prev', event => this.onImagePrev(event));
@@ -140,7 +150,7 @@ export default class JSSlider {
             
             const parentCurrent = current.parentElement;
             const nextElement = parentCurrent.nextElementSibling;
-            if(nextElement && !nextElement.className.includes(`.${this.sliderRootElement.prototypeClass}`)) {
+            if(nextElement && !nextElement.className.includes(`${this.sliderRootElement.prototypeClass}`)) {
                 const img = nextElement.querySelector('img')
                 img.classList.add(this.sliderRootElement.currentImageClass);
         
@@ -155,7 +165,7 @@ export default class JSSlider {
         
             const parentCurrent = current.parentElement;
             const prevElement = parentCurrent.previousElementSibling;
-            if(prevElement && !prevElement.className.includes(`.${this.sliderRootElement.prototypeClass}`)) {
+            if(prevElement && !prevElement.className.includes(`${this.sliderRootElement.prototypeClass}`)) {
                 const img = prevElement.querySelector('img')
                 img.classList.add(this.sliderRootElement.currentImageClass);
         
