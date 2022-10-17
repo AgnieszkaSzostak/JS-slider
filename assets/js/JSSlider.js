@@ -131,19 +131,29 @@ export default class JSSlider {
             this.sliderRootElement.querySelector('.js-slider__image').src = src;
         
             const groupName = event.currentTarget.dataset.sliderGroupName;
-            const thumbsList = document.querySelectorAll(`${this.selector}[data-slider-group-name='${groupName}']`);
-            const prototype = document.querySelector(`.${this.sliderRootElement.prototypeClass}`);
-            thumbsList.forEach( item => {
-                const thumbElement = prototype.cloneNode(true);
-                thumbElement.classList.remove('js-slider__thumbs-item--prototype');
-                const thumbImg = thumbElement.querySelector('img');
-                thumbImg.src = item.querySelector('img').src;
-                if(thumbImg.src === src) {
-                    thumbImg.classList.add('js-slider__thumbs-image--current');
-                }
-                document.querySelector('.js-slider__thumbs').appendChild(thumbElement);
-            })
+            this.createThumbs(groupName, src);
+        }
+    createThumbs(groupName, src){
+        const thumbsList = document.querySelectorAll(`${this.selector}[data-slider-group-name='${groupName}']`);
+        
+        thumbsList.forEach( item => {
+            const thumbElement = this.cloneThumbElement(); 
+            const thumbImg = thumbElement.querySelector('img');
+            thumbImg.src = item.querySelector('img').src;
+            if(thumbImg.src === src) {
+                thumbImg.classList.add('js-slider__thumbs-image--current');
+            }
+            document.querySelector('.js-slider__thumbs').appendChild(thumbElement);
+        })
     }
+    cloneThumbElement(){
+        const prototype = document.querySelector(`.${this.sliderRootElement.prototypeClass}`);
+        const thumbElement = prototype.cloneNode(true);
+        thumbElement.classList.remove('js-slider__thumbs-item--prototype');
+
+        return thumbElement
+    }
+    
     onImageNext(event){
             console.log(this, 'onImageNext');
             const current = document.querySelector(`.${this.sliderRootElement.currentImageClass}`);
@@ -161,7 +171,7 @@ export default class JSSlider {
             const prevElement = parentCurrent.previousElementSibling;
             this.changeCurrentImage(prevElement, current);
     }
-    
+
     changeCurrentImage(newCurrent, current){
         if(newCurrent && !newCurrent.className.includes(`${this.sliderRootElement.prototypeClass}`)) {
             const img = newCurrent.querySelector('img')
