@@ -153,7 +153,7 @@ export default class JSSlider {
 
         return thumbElement
     }
-    
+
     onImageNext(event){
             console.log(this, 'onImageNext');
             const current = document.querySelector(`.${this.sliderRootElement.currentImageClass}`);
